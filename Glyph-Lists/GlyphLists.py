@@ -11,9 +11,9 @@ from mojo.UI import OpenSpaceCenter, CurrentSpaceCenter
 from modules.dicts import *
 
 class GlyphLists(object):
-	
+
 	def __init__(self):
-		
+
 		self.font = CurrentFont()
 		self.listsList =['uppercase_plain', 'uppercase_accents', 'uppercase_special_accents', 'uppercase_ligatures', 'uppercase', 'lowercase_plain', 'lowercase_accents', 'lowercase_special_accents', 'lowercase_ligatures', 'lowercase', 'smallcaps_plain', 'smallcaps_accents', 'smallcaps_special_accents', 'smallcaps_ligatures', 'smallcaps', 'all_accents', 'digits', 'digits_oldstyle', 'digits_superior', 'digits_inferior', 'fractions', 'currency', 'currency_oldstyle', 'currency_superior', 'currency_inferior', 'inferior', 'superior', 'accents', 'dashes', 'legal', 'ligatures', 'punctuation', 'numerical', 'slashes', 'special']	  
 		self.w = Window((250, 300), 'Glyph Lists', maxSize=(250,300), minSize=(250,300))
@@ -27,9 +27,9 @@ class GlyphLists(object):
 		self.w.spaceCenterButton = Button((5,270,80,18), "SpaceCenter", sizeStyle = "small", callback=self.spaceCenter)  
 		self.w.spaceCenterButton2 = Button((-140,270,130,18), "SpaceCenter allFonts", sizeStyle = "small", callback=self.spaceCenterAllFonts)	
 		self.w.open() 
-	
+
 	def perform(self):  
-			
+
 		glyphs = "/"+str(self.glyphlist).strip('[\'\'])').replace(', ','/').replace('\'','')
 		self.w.textBox.set(glyphs)
 
@@ -42,13 +42,23 @@ class GlyphLists(object):
 		if self.w.glyphSelect.get() == 0:
 			pass
 		else:
-			for index,item in enumerate(selectionList):		  
-				if self.w.glyphSelect.get() == index+1:
-					selectedGlyph = selectionList[index]   
-			for key, value in dependencies.items():
-				if key == selectedGlyph:
-					self.glyphlist.append(value)					   
-			self.perform()
+			if self.w.removeGlyphs.get() == 0:
+			    for index,item in enumerate(selectionList):		  
+    				if self.w.glyphSelect.get() == index+1:
+    					selectedGlyph = selectionList[index]   
+			    for key, value in dependencies.items():
+    				if key == selectedGlyph:
+    					self.glyphlist.append(value)					   
+			    self.perform()
+			if self.w.removeGlyphs.get() == 1:
+			    for index,item in enumerate(selectionList):		  
+    				if self.w.glyphSelect.get() == index+1:
+    					selectedGlyph = selectionList[index]   
+			    for key, value in dependencies.items():
+    				if key == selectedGlyph:
+    					self.glyphlist.append(value)					   
+			    self.perform()
+			    self.removeGlyphsNotInFont(self)
 
 	def selectGlyphGstringOther(self, sender): 
 
@@ -59,14 +69,23 @@ class GlyphLists(object):
 		if self.w.glyphSelectOther.get() == 0:
 			pass
 		else:
-			for index,item in enumerate(selectionList):	 
-				if self.w.glyphSelectOther.get() == index+1:
-						selectedGlyph = selectionList[index]					  
-						selection.append(selectedGlyph)		
-			for item in globals()[selectedGlyph]:			   
-				self.glyphlist.append(item)
-			self.perform()
-		
+			if self.w.removeGlyphsOtherLists.get() == 0:
+			    for index,item in enumerate(selectionList):	 
+    				if self.w.glyphSelectOther.get() == index+1:
+    						selectedGlyph = selectionList[index]					  
+    						selection.append(selectedGlyph)		
+			    for item in globals()[selectedGlyph]:			   
+    				self.glyphlist.append(item)
+			    self.perform()
+			if self.w.removeGlyphsOtherLists.get() == 1:
+			    for index,item in enumerate(selectionList):	 
+    				if self.w.glyphSelectOther.get() == index+1:
+    						selectedGlyph = selectionList[index]					  
+    						selection.append(selectedGlyph)		
+			    for item in globals()[selectedGlyph]:			   
+    				self.glyphlist.append(item)
+			    self.perform()
+			    self.removeGlyphsOtherLists(self)
 
 	def removeGlyphsNotInFont(self, sender): 
 		if CurrentFont() == None:
@@ -128,5 +147,5 @@ class GlyphLists(object):
 			   for font in AllFonts():	 
 				    sc = OpenSpaceCenter(font)
 				    sc.setRaw(textinput)
-		
+
 GlyphLists()
