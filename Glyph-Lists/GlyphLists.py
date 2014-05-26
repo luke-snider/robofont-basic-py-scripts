@@ -76,14 +76,9 @@ class GlyphLists(object):
 				self.glyphlist = str(self.w.textBox.get()).strip("u").strip("/")
 				newglyphlist = self.glyphlist.split("/")
 				glyphListOfGlyphsInCurrentFont = []
-				for g in self.font:
-					if g.name in newglyphlist:
-						try:
-							glyphListOfGlyphsInCurrentFont.append(g.name)
-						except ValueError:
-							pass 
-						except AttributeError:
-							pass			
+				for g in newglyphlist:
+				    if self.font.has_key(g):
+						glyphListOfGlyphsInCurrentFont.append(g)			
 				self.glyphlist = glyphListOfGlyphsInCurrentFont
 				self.perform()
 			if self.w.removeGlyphs.get() == 0:
@@ -97,14 +92,9 @@ class GlyphLists(object):
 				self.glyphlist = str(self.w.textBox.get()).strip("u").strip("/")
 				newglyphlist = self.glyphlist.split("/")
 				glyphListOfGlyphsInCurrentFont = []
-				for g in self.font:
-					if g.name in newglyphlist:
-						try:
-							glyphListOfGlyphsInCurrentFont.append(g.name)
-						except ValueError:
-							pass 
-						except AttributeError:
-							pass			
+				for g in newglyphlist:
+				    if self.font.has_key(g):
+						glyphListOfGlyphsInCurrentFont.append(g)			
 				self.glyphlist = glyphListOfGlyphsInCurrentFont
 				self.perform()
 			if self.w.removeGlyphsOtherLists.get() == 0:
