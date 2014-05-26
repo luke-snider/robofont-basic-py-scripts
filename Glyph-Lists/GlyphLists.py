@@ -114,6 +114,7 @@ class GlyphLists(object):
         if CurrentFont() == None: 
             self.w.textBox.set("Open a font!")
         else:
+            self.font = CurrentFont()
             textinput = self.w.textBox.get()          
             sc = OpenSpaceCenter(self.font)
             sc.setRaw(textinput)
