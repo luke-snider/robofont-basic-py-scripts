@@ -6,7 +6,7 @@ by Lukas Schneider 2014-05-25
 """
 
 from dialogKit import *
-from vanilla import FloatingWindow
+from vanilla import Window
 from mojo.UI import OpenSpaceCenter, CurrentSpaceCenter
 from modules.dicts import *
 
@@ -16,7 +16,7 @@ class GlyphLists(object):
 
 		self.font = CurrentFont()
 		self.listsList =['uppercase_plain', 'uppercase_accents', 'uppercase_special_accents', 'uppercase_ligatures', 'uppercase', 'lowercase_plain', 'lowercase_accents', 'lowercase_special_accents', 'lowercase_ligatures', 'lowercase', 'smallcaps_plain', 'smallcaps_accents', 'smallcaps_special_accents', 'smallcaps_ligatures', 'smallcaps', 'all_accents', 'digits', 'digits_oldstyle', 'digits_superior', 'digits_inferior', 'fractions', 'currency', 'currency_oldstyle', 'currency_superior', 'currency_inferior', 'inferior', 'superior', 'accents', 'dashes', 'legal', 'ligatures', 'punctuation', 'numerical', 'slashes', 'special']	  
-		self.w = FloatingWindow((250, 300), 'Glyph Lists', maxSize=(250,300), minSize=(250,300))
+		self.w = Window((250, 300), 'Glyph Lists', maxSize=(250,300), minSize=(250,300))
 		self.w.textBox = EditText((1, 1, -1, 180), "", sizeStyle = "small")
 		self.w.infotext = TextBox((5,185,300,20), text="Print glyph dependencies:", sizeStyle = "small") 
 		self.w.glyphSelect = PopUpButton((5, 195, 60, 30), ['select', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ae', 'oslash', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'AE', 'Oslash'], sizeStyle = "small", callback=self.selectGlyphGstring)
