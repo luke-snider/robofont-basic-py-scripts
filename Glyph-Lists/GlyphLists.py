@@ -111,7 +111,7 @@ class GlyphLists(object):
                 self.selectGlyphGstringOther(self)
 
     def spaceCenter(self, sender): 
-        if self.font == None: 
+        if CurrentFont() == None: 
             self.w.textBox.set("Open a font!")
         else:
             textinput = self.w.textBox.get()          
@@ -119,7 +119,7 @@ class GlyphLists(object):
             sc.setRaw(textinput)
 
     def spaceCenterAllFonts(self, sender): 
-        if self.font == None: 
+        if CurrentFont() == None: 
             self.w.textBox.set("Open a font!")
         else: 
             textinput = self.w.textBox.get()  
